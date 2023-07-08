@@ -1,0 +1,42 @@
+<p>error-list works!</p>
+<!-- {{hibajegyek|json}} -->
+
+
+
+<ng-container *ngIf="isOk">
+    <div class="row">
+        <div *ngFor="let oszlop of oszlopok" class="col">
+            {{oszlop.text}}
+        </div>
+        <div class="col">
+            Műveletek
+        </div>
+    </div>
+    
+    <div *ngFor="let hibajegy of hibajegyek" class="row my-2">
+        <div *ngFor="let oszlop of oszlopok" class="col">
+            <!-- {{oszlop.type}};{{hibajegy[oszlop.key]}} -->
+            <ng-container *ngIf="oszlop.type=='select'; else plainText" >
+    
+                <select  class="form-select" [(ngModel)]="hibajegy[oszlop.key]">
+                    <option *ngFor="let ertek of oszlop.values"
+                    [value]="ertek.value"
+                    [selected]="ertek.value==hibajegy[oszlop.key]">
+                    {{ertek.text}}
+                    </option>
+    
+                  </select>
+            </ng-container>
+    
+    
+            <ng-template #plainText>
+                {{hibajegy[oszlop.key]}}
+            </ng-template>
+    
+        </div>
+        <div class="col">
+            <button (click)="update(hibajegy)" class="btn btn-primary mx-3">Save</button>
+            <button (click)="delete(hibajegy)"  class="btn btn-primary">Del</button>
+        </div>
+    </div>
+</ng-container>

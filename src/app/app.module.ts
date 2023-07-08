@@ -10,11 +10,22 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Enviroments } from './enviroments';
 import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ErrorListComponent } from './error-list/error-list.component';
+import { FormsModule } from '@angular/forms';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NavComponent,
+    SignInComponent,
+    SignUpComponent,
+    ErrorListComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +33,8 @@ import { HomeComponent } from './home/home.component';
     NgbModule,
     AngularFireModule.initializeApp(Enviroments.firebaseConfig),
     AngularFireDatabaseModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

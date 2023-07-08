@@ -8,14 +8,15 @@ import { GoogleAuthProvider } from 'firebase/auth';
   providedIn: 'root'
 })
 export class AuthService {
-  // apiUrl="https://us-central1-hibajegykezelo-abbcf.cloudfunctions.net/api/"
+  apiUrl="https://us-central1-hibajegykezelo-abbcf.cloudfunctions.net/api/"
    isLogged = new Subject()
    loggedUser:any;
 
    actionCodeSettings = {
      // URL you want to redirect back to. The domain (www.example.com) for this
      // URL must be in the authorized domains list in the Firebase Console.
-     url: 'http://localhost:4200/home',
+    //  url: 'http://localhost:4200/home',
+     url: 'https://hibajegykezelo-abbcf.web.app/home',
      // This must be true.
      handleCodeInApp: true,   
    };
@@ -34,9 +35,9 @@ export class AuthService {
          this.loggedUser.getIdToken().then((t:any)=>        
          {
            this.loggedUser.token=t;
-          //  this.getClaims(this.loggedUser.uid).subscribe(
-          //    (claims)=> this.loggedUser.claims=claims
-          //  )
+           this.getClaims(this.loggedUser.uid).subscribe(
+             (claims)=> this.loggedUser.claims=claims
+           )
          })
         
          // console.log('User'+user);
@@ -84,24 +85,24 @@ export class AuthService {
      return this.afAuth.signInWithRedirect(new GoogleAuthProvider())
    }
  
-  //  getClaims(uid:string){
-  //    const headers = new HttpHeaders().set('Authorization', this.loggedUser.token);
-  //    const url=this.apiUrl+"users/"+uid+"/claims";
-  //    return this.http.get(url, {headers})
-  //  }
+   getClaims(uid:string){
+     const headers = new HttpHeaders().set('Authorization', this.loggedUser.token);
+     const url=this.apiUrl+"users/"+uid+"/claims";
+     return this.http.get(url, {headers})
+   }
  
-  //  getUsers(){
-  //    console.log("Bejelemtkezve", this.loggedUser)
-  //    const headers = new HttpHeaders().set('Authorization', this.loggedUser.token);
-  //    const url=this.apiUrl+"users";
-  //    return this.http.get(url, {headers})
-  //  }
+   getUsers(){
+     console.log("Bejelemtkezve", this.loggedUser)
+     const headers = new HttpHeaders().set('Authorization', this.loggedUser.token);
+     const url=this.apiUrl+"users";
+     return this.http.get(url, {headers})
+   }
  
-  //  setClaims(uid:string, claims:string){
-  //    const headers = new HttpHeaders().set('Authorization', this.loggedUser.token);
-  //    const url=this.apiUrl+"setCustomClaims";
-  //    const body={uid, claims}
-  //    console.log("setClaimsBody", body)
-  //    this.http.post(url, body, {headers}).subscribe()
-  //  }
+   setClaims(uid:string, claims:string){
+     const headers = new HttpHeaders().set('Authorization', this.loggedUser.token);
+     const url=this.apiUrl+"setCustomClaims";
+     const body={uid, claims}
+     console.log("setClaimsBody", body)
+     this.http.post(url, body, {headers}).subscribe()
+   }
  }
