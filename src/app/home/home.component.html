@@ -1,0 +1,18 @@
+<ng-container *ngIf="!user; else hibabejelentes">
+<div class="card" >  
+        <div class="card-body">
+        <h5 class="card-title">Hibabejelentés</h5> 
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email cím</label>
+                <input #email type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Írd be az email címed a hibabejelentéshez!</div>
+                </div> 
+                    <button (click)="sendUpLink(email.value)" class="btn btn-primary">Hibabejelentés</button>
+                </div>
+    </div>
+</ng-container>
+<ng-template #hibabejelentes>
+    fasdgdgfdgd
+    <p>Hibabejelntés</p>
+    <button (click)="hibaBejent()" class="btn btn-primary">Hibabejelentés</button>
+</ng-template>
